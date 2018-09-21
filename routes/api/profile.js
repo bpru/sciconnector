@@ -16,6 +16,23 @@ const User = require('../../models/User');
 // @access  Public
 router.get('/test', (req, res) => res.json({msg: 'Profile works'}));
 
+// @route   GET api/profile/all
+// @desc    get all profiles
+// @access  Public
+router.get('/all', (req, res) => {
+  const errors = {};
+  Profile.find()
+    .then(profiles => {
+      if (!profiles) {
+        errors.nopfofile = 'There is no profile';
+        res.status(404).json(errors);
+      }
+
+      res.json(profiles);
+    })
+    .catch(err => res.status(400).json({noprofile: 'there is no profile'})); 
+})
+
 // @route   GET api/profile/handle/:handle
 // @desc    get current user's profile by handle
 // @access  Public
