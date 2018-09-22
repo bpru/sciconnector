@@ -45,8 +45,7 @@ const ProfileSchema = new Schema({
         required: true
       },
       location: {
-        type: String,
-        required: true
+        type: String
       },
       from: {
         type: Date,
@@ -79,8 +78,8 @@ const ProfileSchema = new Schema({
         required: true
       },
       from: {
-        type: Date,
-        required: true
+        type: Date
+        // required: true
       },
       to: {
         type: Date
