@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
@@ -17,6 +17,12 @@ class Register extends Component {
 		};
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({errors: nextProps.errors});
+		}
+	}
+
 	onChange = (e) => {
 		this.setState({[e.target.name]: e.target.value});
 	}
@@ -30,11 +36,8 @@ class Register extends Component {
 			password2: this.state.password2
 		}
 		console.log(newUser);
-		this.props.registerUser(newUser);
-		// axios.post('/api/users/register', newUser)
-		// 	.then(res => console.log(res.data))
-		// 	.catch(err => this.setState({errors: err.response.data})
-		// );
+		this.props.registerUser(newUser, this.props.history);
+
 
 	}
 
@@ -43,10 +46,9 @@ class Register extends Component {
 		// this equals to:
 		// const errors = this.state.errors;
 
-		const { user } = this.props.auth;
 		return (
 			<div className="register">
-				<h1>{user? user.name: null}</h1>
+
 				<div className="container">
 					<div className="row">
 						<div className="col-md-8 m-auto">
@@ -108,12 +110,17 @@ class Register extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	auth: state.auth
+	auth: state.auth,
+	errors: state.errors
 })
 
 Register.propTypes = {
 	registerUser: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired
+	auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired
 }
 
-export default connect(mapStateToProps, {registerUser})(Register);
+export default connect(mapStateToProps, {registerUser})(withRouter(Register));
+// You can get access to the history object's properties and the closest <Route>'s match
+// via the withRouter higher-order component. withRouter will pass updated match, location,
+// and history props to the wrapped component whenever it renders.
