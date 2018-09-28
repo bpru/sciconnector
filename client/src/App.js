@@ -8,7 +8,19 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import { Provider } from 'react-redux';
 import store from './store';
+import setAuthToken from "./utils/setAuthToken";
+import {setCurrentUser} from "./actions/authActions";
+import jwt_decode from 'jwt-decode';
 
+// check for token
+if (localStorage.jwtToken) {
+//	set auth token header auth
+	setAuthToken(localStorage.jwtToken);
+//	decode token and get user info
+	const decoded = jwt_decode(localStorage.jwtToken);
+//	set user and isAuthenticated
+	store.dispatch(setCurrentUser(decoded));
+}
 class App extends Component {
   render() {
     return (
