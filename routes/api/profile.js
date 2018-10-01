@@ -39,7 +39,7 @@ router.get('/all', (req, res) => {
 // @desc    get current user's profile by handle
 // @access  Public
 router.get('/handle/:handle', (req, res) => {
-  errors = {};
+  const errors = {};
   Profile.findOne({handle: req.params.handle})
     .populate('user', ['name', 'avatar'])
     .then(profile => {
@@ -57,7 +57,7 @@ router.get('/handle/:handle', (req, res) => {
 // @desc    get current user's profile by user id
 // @access  Public
 router.get('/user/:user_id', (req, res) => {
-  errors = {};
+  const errors = {};
   Profile.findOne({user: req.params.user_id})
     .populate('user', ['name', 'avatar'])
     .then(profile => {
@@ -104,7 +104,7 @@ router.post('/',
       return res.status(400).json(errors);
     }
 
-    // get fileds
+    // get fields
     const profileFields = {};
     profileFields.user = req.user.id;
     if (req.body.handle) profileFields.handle = req.body.handle;
