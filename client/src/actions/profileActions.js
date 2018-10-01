@@ -1,5 +1,6 @@
 import * as actionTypes from './types';
 import axios from 'axios';
+import {setCurrentUser} from "./authActions";
 
 //get current profile
 export const getCurrentProfile = () => dispatch => {
@@ -24,6 +25,19 @@ export const createProfile = (profileData, history) => dispatch => {
 			type: actionTypes.GET_ERRORS,
 			payload: err.response.data
 		}))
+}
+
+export const deleteAccount = () => dispatch => {
+	if (window.confirm("Are you sure? This cannot be undo")) {
+		axios.delete('/api/profile')
+			.then(res => {
+				dispatch(setCurrentUser({}));
+			})
+			.catch(err => dispatch({
+				type: actionTypes.GET_ERRORS,
+				payload: err.response.data
+			}))
+	}
 }
 
 export const setProfileLoading = () => {
