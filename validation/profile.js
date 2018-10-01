@@ -8,13 +8,14 @@ module.exports = function validateProfileInput(data) {
   data.handle = !isEmpty(data.handle)? data.handle: '';
   data.status = !isEmpty(data.status)? data.status: '';
   data.skills = !isEmpty(data.skills)? data.skills: '';
-  
+
+
+	if (!Validator.isLength(data.handle, { min: 2, max: 40})) {
+		errors.handle = 'Handle field shuld between 2 and 40 characters';
+	}
 
   if (Validator.isEmpty(data.handle)) {
     errors.handle = 'Handle field is required';
-  }
-  if (!Validator.isLength(data.handle, { min: 2, max: 40})) {
-    errors.handle = 'Handle field shuld between 2 and 40 characters';
   }
 
   if (Validator.isEmpty(data.status)) {

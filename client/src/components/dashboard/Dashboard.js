@@ -19,7 +19,7 @@ class Dashboard extends Component {
 			dashboardContent = <Spinner/>;
 		} else {
 		//	check if the logged in user has profile
-			if (Object.keys(profile) > 0) {
+			if (Object.keys(profile).length > 0) {
 				dashboardContent = <h4>todo: display profile</h4>
 			} else {
 				dashboardContent = (

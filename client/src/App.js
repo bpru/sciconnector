@@ -14,6 +14,7 @@ import {logoutUser, setCurrentUser} from "./actions/authActions";
 import jwt_decode from 'jwt-decode';
 import {clearCurrentProfile} from "./actions/profileActions";
 import PrivateRoute from './components/common/PrivateRoute';
+import CreateProfile from "./components/create-profile/CreateProfile";
 
 // check for token
 if (localStorage.jwtToken) {
@@ -50,7 +51,9 @@ class App extends Component {
 					    <Switch>
 						    <PrivateRoute exact path="/dashboard" component={Dashboard}/>
 					    </Switch>
-
+					    <Switch>
+						    <PrivateRoute exact path="/create-profile" component={CreateProfile}/>
+					    </Switch>
 				    </div>
 				    <Footer/>
 			    </div>
