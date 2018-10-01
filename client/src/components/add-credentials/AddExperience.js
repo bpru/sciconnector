@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Link from "react-router-dom/es/Link";
 import TextFieldGroup from "../common/TextFieldGroup";
 import TextAreaGroup from "../common/TextAreaGroup";
+import {addExperience} from "../../actions/profileActions";
 
 class AddExperience extends Component {
 	state = {
@@ -25,7 +26,17 @@ class AddExperience extends Component {
 
 	onSubmit = e => {
 		e.preventDefault();
-		console.log('submit');
+		const expData = {
+			company: this.state.company,
+			title: this.state.title,
+			location: this.state.location,
+			from: this.state.from,
+			to: this.state.to,
+			description: this.state.description,
+			current: this.state.current
+		}
+
+		this.props.addExperience(expData, this.props.history);
 	}
 
 	onCheck = e => {
@@ -34,6 +45,13 @@ class AddExperience extends Component {
 			disabled: !this.state.disabled
 		})
 	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({errors: nextProps.errors});
+		}
+	}
+
 	render() {
 		const {errors} = this.state;
 		return (
@@ -45,7 +63,7 @@ class AddExperience extends Component {
 							<h1 className="display-4 text-center">Add Experience</h1>
 							<p className="lead text-center">Add any job or position that you have had in the past or current</p>
 							<small className="d-block pd-3">* = required fields</small>
-							<form onSubmit={this.onSUbmit}>
+							<form onSubmit={this.onSubmit}>
 								<TextFieldGroup
 									placeholder='* Company'
 									value={this.state.company}
@@ -112,7 +130,8 @@ class AddExperience extends Component {
 
 AddExperience.propTypes = {
 	profile: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
+	errors: PropTypes.object.isRequired,
+	addExperience: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -120,4 +139,4 @@ const mapStateToProps = state => ({
 	errors: state.errors
 })
 
-export default connect(mapStateToProps)(withRouter(AddExperience));
+export default connect(mapStateToProps, { addExperience })(withRouter(AddExperience));
