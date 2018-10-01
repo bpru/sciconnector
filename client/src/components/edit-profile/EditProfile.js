@@ -52,11 +52,11 @@ class EditProfile extends Component {
 			profile.status = !isEmpty(profile.status)? profile.status: '';
 			profile.bio = !isEmpty(profile.bio)? profile.bio: '';
 			// profile.social = !isEmpty(profile.social)? profile.social: {};
-			profile.twitter = !isEmpty(profile.social.twitter)? profile.social.twitter: '';
-			profile.youtube = !isEmpty(profile.social.youtube)? profile.social.youtube: '';
-			profile.linkedin = !isEmpty(profile.social.linkedin)? profile.social.linkedin: '';
-			profile.facebook = !isEmpty(profile.social.facebook)? profile.social.facebook: '';
-			profile.instagram = !isEmpty(profile.social.instagram)? profile.social.instagram: '';
+			profile.twitter = profile.social && !isEmpty(profile.social.twitter)? profile.social.twitter: '';
+			profile.youtube = profile.social && !isEmpty(profile.social.youtube)? profile.social.youtube: '';
+			profile.linkedin = profile.social && !isEmpty(profile.social.linkedin)? profile.social.linkedin: '';
+			profile.facebook = profile.social && !isEmpty(profile.social.facebook)? profile.social.facebook: '';
+			profile.instagram = profile.social && !isEmpty(profile.social.instagram)? profile.social.instagram: '';
 
 			this.setState({
 				handle: profile.handle,
