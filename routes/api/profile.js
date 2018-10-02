@@ -36,10 +36,10 @@ router.get('/all', (req, res) => {
     .catch(err => res.status(400).json({noprofile: 'there is no profile'})); 
 })
 
-// @route   GET api/profile/handle/:handle
+// @route   GET api/profile/:handle
 // @desc    get current user's profile by handle
 // @access  Public
-router.get('/handle/:handle', (req, res) => {
+router.get('/:handle', (req, res) => {
   const errors = {};
   Profile.findOne({handle: req.params.handle})
     .populate('user', ['name', 'avatar'])

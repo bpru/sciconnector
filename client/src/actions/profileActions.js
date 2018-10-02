@@ -104,3 +104,16 @@ export const clearCurrentProfile = () => {
 		type: actionTypes.CLEAR_CURRENT_PROFILE
 	}
 }
+
+export const getProfileByHandle = handle => dispatch =>{
+	dispatch(setProfileLoading());
+	axios.get(`/api/profile/${handle}`)
+		.then(res => dispatch({
+			type: actionTypes.GET_PROFILE,
+			payload: res.data
+		}))
+		.catch(err => dispatch({
+			type: actionTypes.GET_PROFILE,
+			payload: null
+		}))
+}
