@@ -47,6 +47,22 @@ export const addEducation = (eduData, history) => dispatch => {
 		}))
 }
 
+export const deleteExperience = id => dispatch => {
+	axios.delete(`api/profile/experience/${id}`)
+		.then(res => dispatch({
+			type: actionTypes.GET_PROFILE,
+			payload: res.data
+		}))
+}
+
+export const deleteEducation = id => dispatch => {
+	axios.delete(`api/profile/education/${id}`)
+		.then(res => dispatch({
+			type: actionTypes.GET_PROFILE,
+			payload: res.data
+		}))
+}
+
 export const deleteAccount = () => dispatch => {
 	if (window.confirm("Are you sure? This cannot be undo")) {
 		axios.delete('/api/profile')
