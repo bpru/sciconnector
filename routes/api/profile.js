@@ -24,6 +24,7 @@ router.get('/test', (req, res) => res.json({msg: 'Profile works'}));
 router.get('/all', (req, res) => {
   const errors = {};
   Profile.find()
+	  .populate('user', ['name', 'avatar'])
     .then(profiles => {
       if (!profiles) {
         errors.nopfofile = 'There is no profile';

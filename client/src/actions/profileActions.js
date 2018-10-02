@@ -2,6 +2,23 @@ import * as actionTypes from './types';
 import axios from 'axios';
 import {setCurrentUser} from "./authActions";
 
+
+//get all profiles
+export const getProfiles = () => dispatch => {
+	dispatch(setProfileLoading());
+	axios.get('/api/profile/all')
+		.then(res =>
+			dispatch({
+				type: actionTypes.GET_PROFILES,
+				payload: res.data
+			}))
+		.catch( err => dispatch({
+			type: actionTypes.GET_PROFILES,
+			payload: null
+		}))
+
+}
+
 //get current profile
 export const getCurrentProfile = () => dispatch => {
 	dispatch(setProfileLoading());
