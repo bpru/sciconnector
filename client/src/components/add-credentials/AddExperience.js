@@ -55,7 +55,7 @@ class AddExperience extends Component {
 	render() {
 		const {errors} = this.state;
 		return (
-			<div className="add-experiemce">
+			<div className="add-experience">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-8 m-auto">

@@ -7,6 +7,7 @@ const passport = require('passport');
 const validataProfileInput = require('../../validation/profile');
 const validateExperienceInput = require('../../validation/experience');
 const validateEducationInput = require('../../validation/education');
+const validatePublicationInput = require('../../validation/publication');
 // load profile model
 const Profile = require('../../models/Profile');
 // loda user profile
@@ -205,6 +206,31 @@ router.post('/education', passport.authenticate('jwt', { session: false }), (req
     .catch(err => res.json(err));
 })
 
+// @route   POST api/profile/publication
+// @desc    add publication to current user's profile
+// @access  Private
+router.post('/publication', passport.authenticate('jwt', { session: false }), (req, res) => {
+	const {errors, isValid} = validatePublicationInput(req.body);
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+	Profile.findOne({ user: req.user.id })
+		.then(profile => {
+			const newPub = {
+				title: req.body.title,
+				year: req.body.year,
+				journalinfo: req.body.journalinfo,
+				authors: req.body.authors,
+				link: req.body.link,
+			}
+			// add to education array in the front
+			profile.publications.unshift(newPub);
+			profile.save().then(profile => res.json(profile)).catch(err => res.json(err));
+		})
+		.catch(err => res.json(err));
+})
+
+
 // @route   DELETE api/profile/education/edu_id
 // @desc    delete education from current user's profile
 // @access  Private
@@ -237,6 +263,20 @@ router.delete('/experience/:exp_id', passport.authenticate('jwt', { session: fal
     })  
     .catch(err => res.json(err));
 })
+
+router.delete('/publication/:pub_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
+	Profile.findOne({ user: req.user.id })
+		.then(profile => {
+			// find the index of publication to be removed
+			const removeId = profile.publications.map(item => item.id).indexOf(req.params.exp_id);
+			// remove publication
+			profile.publications.splice(removeId, 1);
+			profile.save().then(profile => res.json(profile)).catch(err => res.json(err));
+		})
+		.catch(err => res.json(err));
+})
+
 
 // @route   DELETE api/profile/
 // @desc    delete  user and profile

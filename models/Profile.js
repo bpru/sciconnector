@@ -113,8 +113,21 @@ const ProfileSchema = new Schema({
   },
 	publications: [
 		{
-			description: {
-				type: String
+			title: {
+				type: String,
+				required: true
+			},
+			year: {
+				type: String,
+				required: true
+			},
+			journalinfo: {
+				type: String,
+				required: true
+			},
+			authors: {
+				type: String,
+				required: true
 			},
 			link: {
 				type: String

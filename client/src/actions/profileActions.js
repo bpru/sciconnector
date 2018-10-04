@@ -64,6 +64,16 @@ export const addEducation = (eduData, history) => dispatch => {
 		}))
 }
 
+export const addPublication = (pubData, history) => dispatch => {
+	axios
+		.post('/api/profile/publication', pubData)
+		.then(res => history.push('/dashboard'))
+		.catch(err => dispatch({
+			type: actionTypes.GET_ERRORS,
+			payload: err.response.data
+		}))
+}
+
 export const deleteExperience = id => dispatch => {
 	axios.delete(`api/profile/experience/${id}`)
 		.then(res => dispatch({
@@ -74,6 +84,14 @@ export const deleteExperience = id => dispatch => {
 
 export const deleteEducation = id => dispatch => {
 	axios.delete(`api/profile/education/${id}`)
+		.then(res => dispatch({
+			type: actionTypes.GET_PROFILE,
+			payload: res.data
+		}))
+}
+
+export const deletePublication = id => dispatch => {
+	axios.delete(`api/profile/publication/${id}`)
 		.then(res => dispatch({
 			type: actionTypes.GET_PROFILE,
 			payload: res.data
