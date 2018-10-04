@@ -24,6 +24,7 @@ class CreateProfile extends Component {
 		linkedin: '',
 		youtube: '',
 		instagram: '',
+		// publications: [],
 		errors: {}
 	}
 

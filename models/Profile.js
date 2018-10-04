@@ -32,9 +32,9 @@ const ProfileSchema = new Schema({
   bio: {
     type: String
   },
-  githubUsername: {
-    type: String
-  },
+  // githubUsername: {
+  //   type: String
+  // },
   experience: [
     {
       title: {
@@ -111,6 +111,17 @@ const ProfileSchema = new Schema({
       type: String
     },
   },
+	publications: [
+		{
+			description: {
+				type: String
+			},
+			link: {
+				type: String
+			}
+		}
+
+	],
   date: {
     type: Date,
     default: Date.now
