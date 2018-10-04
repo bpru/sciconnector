@@ -7,6 +7,7 @@ import SelectListGroup from "../common/SelectListGroup";
 import TextAreaGroup from "../common/TextAreaGroup";
 import InputGroup from "../common/InputGroup";
 import {createProfile} from "../../actions/profileActions";
+import Link from "react-router-dom/es/Link";
 
 class CreateProfile extends Component {
 	state = {
@@ -17,14 +18,14 @@ class CreateProfile extends Component {
 		location: '',
 		status: '',
 		skills: '',
-		githubusername: '',
+		// githubusername: '',
 		bio: '',
 		twitter: '',
 		facebook: '',
 		linkedin: '',
 		youtube: '',
 		instagram: '',
-		// publications: [],
+		publications: [],
 		errors: {}
 	}
 
@@ -43,7 +44,7 @@ class CreateProfile extends Component {
 			location: this.state.location,
 			status: this.state.status,
 			skills: this.state.skills,
-			githubusername: this.state.githubusername,
+			// githubusername: this.state.githubusername,
 			bio: this.state.bio,
 			twitter: this.state.twitter,
 			facebook: this.state.facebook,
@@ -103,15 +104,19 @@ class CreateProfile extends Component {
 		}
 		const options = [
 			{ label: '* Select Professional Status', value: 0},
-			{ label: 'Developer', value: 'Developer'},
-			{ label: 'Junior Developer', value: 'Junior Developer'},
-			{ label: 'Senior Developer', value: 'Senior Developer'},
-			{ label: 'Manager', value: 'Manager'},
-			{ label: 'Student or Learning', value: 'Student or Learning'},
-			{ label: 'Instructor or Teacher', value: 'Instructor or Teacher'},
+			{ label: 'Director', value: 'Director'},
+			{ label: 'Senior Scientist', value: 'Senior Scientist'},
+			{ label: 'Scientist', value: 'Scientist'},
 			{ label: 'Intern', value: 'Intern'},
+			{ label: 'Professor', value: 'Professor'},
+			{ label: 'Associate Professor', value: 'Associate Professor'},
+			{ label: 'Assistant Professor', value: 'Assistant Professor'},
+			{ label: 'Instructor', value: 'Instructor'},
+			{ label: 'Post-Doc', value: 'Post-Doc'},
+			{ label: 'Graduate Student', value: 'Graduate Student'},
+			{ label: 'Undergraduate Student', value: 'Undergraduate Student'},
 			{ label: 'Other', value: 'Other'}
-		]
+		];
 		return (
 			<div className="create-profile">
 				<div className="container">
@@ -121,6 +126,7 @@ class CreateProfile extends Component {
 							<p className="lead text-center">
 								Let's get some information to make your profile stand out
 							</p>
+
 							<small className="d-block pb-3">* = required fields</small>
 							<form onSubmit={this.onSubmit}>
 								<TextFieldGroup
@@ -130,9 +136,9 @@ class CreateProfile extends Component {
 									onChange={this.onChange}
 									error={errors.handle}
 									info="A unique handle for your profile URL. Your full name, company name, nickname, etc
-									(This CAN'T be changed later"/>
+									(This CAN'T be changed later)"/>
 								<SelectListGroup
-									placeholder="Status"
+									placeholder="* Status"
 									name="status"
 									value={this.state.status}
 									onChange={this.onChange}
@@ -154,21 +160,21 @@ class CreateProfile extends Component {
 									onChange={this.onChange}
 									info='City or city & state suggested (eg. Boston, MA)'/>
 								<TextFieldGroup
-									placeholder='Skills'
+									placeholder='* Skills'
 									name='skills'
 									value={this.state.skills}
 									error={errors.skills}
 									onChange={this.onChange}
-									info='Please use comma to separate values (eg. HTML,CSS)'/>
-								<TextFieldGroup
-									placeholder='Github Username'
-									name='githubusername'
-									value={this.state.githubusername}
-									error={errors.githubusername}
-									onChange={this.onChange}
-									info='Your github username'/>
+									info='Please use comma to separate values (eg. Gene Therapy, Immunology)'/>
+								{/*<TextFieldGroup*/}
+									{/*placeholder='Github Username'*/}
+									{/*name='githubusername'*/}
+									{/*value={this.state.githubusername}*/}
+									{/*error={errors.githubusername}*/}
+									{/*onChange={this.onChange}*/}
+									{/*info='Your github username'/>*/}
 								<TextAreaGroup
-									placeholder='Short Bio'
+									placeholder='Short Bio or Research Interest'
 									name='bio'
 									value={this.state.bio}
 									error={errors.bio}

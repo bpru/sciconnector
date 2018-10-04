@@ -18,13 +18,14 @@ class EditProfile extends Component {
 		location: '',
 		status: '',
 		skills: '',
-		githubusername: '',
+		// githubusername: '',
 		bio: '',
 		twitter: '',
 		facebook: '',
 		linkedin: '',
 		youtube: '',
 		instagram: '',
+		publications: [],
 		errors: {}
 	}
 
@@ -51,6 +52,7 @@ class EditProfile extends Component {
 			profile.githubusername = !isEmpty(profile.githubusername)? profile.githubusername: '';
 			profile.status = !isEmpty(profile.status)? profile.status: '';
 			profile.bio = !isEmpty(profile.bio)? profile.bio: '';
+			profile.skills = profile.skills.length > 0? profile.skills.join(', '): '';
 			// profile.social = !isEmpty(profile.social)? profile.social: {};
 			profile.twitter = profile.social && !isEmpty(profile.social.twitter)? profile.social.twitter: '';
 			profile.youtube = profile.social && !isEmpty(profile.social.youtube)? profile.social.youtube: '';
@@ -66,6 +68,7 @@ class EditProfile extends Component {
 				githubusername: profile.githubusername,
 				status: profile.status,
 				bio: profile.bio,
+				skills: profile.skills,
 				facebook: profile.facebook,
 				twitter: profile.twitter,
 				linkedin: profile.linkedin,
@@ -145,15 +148,19 @@ class EditProfile extends Component {
 		}
 		const options = [
 			{ label: '* Select Professional Status', value: 0},
-			{ label: 'Developer', value: 'Developer'},
-			{ label: 'Junior Developer', value: 'Junior Developer'},
-			{ label: 'Senior Developer', value: 'Senior Developer'},
-			{ label: 'Manager', value: 'Manager'},
-			{ label: 'Student or Learning', value: 'Student or Learning'},
-			{ label: 'Instructor or Teacher', value: 'Instructor or Teacher'},
+			{ label: 'Director', value: 'Director'},
+			{ label: 'Senior Scientist', value: 'Senior Scientist'},
+			{ label: 'Scientist', value: 'Scientist'},
 			{ label: 'Intern', value: 'Intern'},
+			{ label: 'Professor', value: 'Professor'},
+			{ label: 'Associate Professor', value: 'Associate Professor'},
+			{ label: 'Assistant Professor', value: 'Assistant Professor'},
+			{ label: 'Instructor', value: 'Instructor'},
+			{ label: 'Post-Doc', value: 'Post-Doc'},
+			{ label: 'Graduate Student', value: 'Graduate Student'},
+			{ label: 'Undergraduate Student', value: 'Undergraduate Student'},
 			{ label: 'Other', value: 'Other'}
-		]
+		];
 		return (
 			<div className="create-profile">
 				<div className="container">
@@ -198,16 +205,16 @@ class EditProfile extends Component {
 									value={this.state.skills}
 									error={errors.skills}
 									onChange={this.onChange}
-									info='Please use comma to separate values (eg. HTML,CSS)'/>
-								<TextFieldGroup
-									placeholder='Github Username'
-									name='githubusername'
-									value={this.state.githubusername}
-									error={errors.githubusername}
-									onChange={this.onChange}
-									info='Your github username'/>
+									info='Please use comma to separate values (eg. Gene Therapy, Immunology)'/>
+								{/*<TextFieldGroup*/}
+									{/*placeholder='Github Username'*/}
+									{/*name='githubusername'*/}
+									{/*value={this.state.githubusername}*/}
+									{/*error={errors.githubusername}*/}
+									{/*onChange={this.onChange}*/}
+									{/*info='Your github username'/>*/}
 								<TextAreaGroup
-									placeholder='Short Bio'
+									placeholder='Short Bio or Research Interests'
 									name='bio'
 									value={this.state.bio}
 									error={errors.bio}
