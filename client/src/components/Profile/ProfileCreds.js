@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 
 class ProfileCreds extends Component {
 	render() {
-		const {experience, education} = this.props;
+		const {experience, education, publications} = this.props;
 		const expItems = experience.map(exp => (
 			<li key={exp._id} className="list-group-item">
 				<h4>{exp.company}</h4>
@@ -44,27 +44,50 @@ class ProfileCreds extends Component {
 				</p>
 			</li>
 		));
+
+		const pubItems = publications.map(pub => (
+			<li key={pub._id} className={"list-group-item"}>
+				<p>
+					{`${pub.authors}. ${pub.year} "`}<strong>{pub.title}</strong>{`" , ${pub.journalinfo}`}
+				</p>
+			</li>
+		))
 		return (
-			<div className="row">
-				<div className="col-md-6">
-					<h3 className="text-info text-center">Experience</h3>
-					{expItems.length > 0 ? (
-						<ul className="list-group">
-							{expItems}
-						</ul>
-					) : (
-						<p className="text-center">No Experience Listed</p>
-					)}
+			<div>
+				<div className="row">
+					<div className="col-md-6">
+						<h3 className="text-info text-center">Experience</h3>
+						{expItems.length > 0 ? (
+							<ul className="list-group">
+								{expItems}
+							</ul>
+						) : (
+							<p className="text-center">No Experience Listed</p>
+						)}
+					</div>
+					<div className="col-md-6">
+						<h3 className="text-info text-center">Education</h3>
+						{eduItems.length > 0 ? (
+							<ul className="list-group">
+								{eduItems}
+							</ul>
+						) : (
+							<p className="text-center">No Education Listed</p>
+						)}
+					</div>
 				</div>
-				<div className="col-md-6">
-					<h3 className="text-info text-center">Education</h3>
-					{eduItems.length > 0 ? (
-						<ul className="list-group">
-							{eduItems}
-						</ul>
-					) : (
-						<p className="text-center">No Education Listed</p>
-					)}
+				<br/>
+				<div className="row">
+					<div className="col-md-12">
+						<h3 className="text-info text-center">Selected Publications</h3>
+						{pubItems.length > 0 ? (
+							<ul className="list-group">
+								{pubItems}
+							</ul>
+						) : (
+							<p className="text-center">No Publication Listed</p>
+						)}
+					</div>
 				</div>
 			</div>
 

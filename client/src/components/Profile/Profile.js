@@ -41,8 +41,9 @@ class Profile extends Component {
 					<ProfileAbout profile={profile}/>
 					<ProfileCreds
 						education={profile.education}
-						experience={profile.experience}/>
-					{profile.githubusername? <ProfileGithub username={profile.githubusername}/> : null}
+						experience={profile.experience}
+						publications={profile.publications}/>
+					{/*{profile.githubusername? <ProfileGithub username={profile.githubusername}/> : null}*/}
 				</div>
 			)
 		}
@@ -62,11 +63,11 @@ class Profile extends Component {
 
 Profile.propTypes = {
 	profile: PropTypes.object.isRequired,
-	getProfileByHandle: PropTypes.func.isRequired
+	getProfileByHandle: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-	profile: state.profile
+	profile: state.profile,
 })
 
 export default connect(mapStateToProps, {getProfileByHandle})(Profile) ;

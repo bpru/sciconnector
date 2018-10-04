@@ -5,6 +5,7 @@ import connect from "react-redux/es/connect/connect";
 import {withRouter} from "react-router-dom";
 import PropTypes from 'prop-types';
 import {addPublication} from "../../actions/profileActions";
+import TextAreaGroup from "../common/TextAreaGroup";
 
 class AddPublication extends Component {
 	state = {
@@ -50,7 +51,7 @@ class AddPublication extends Component {
 							<p className="lead text-center">Add your selected publications</p>
 							<small className="d-block pd-3">* = required fields</small>
 							<form onSubmit={this.onSubmit}>
-								<TextFieldGroup
+								<TextAreaGroup
 									placeholder='* Title'
 									value={this.state.title}
 									name='title'
@@ -68,7 +69,7 @@ class AddPublication extends Component {
 									name='journalinfo'
 									onChange={this.onChange}
 									error={errors.journalinfo}/>
-								<TextFieldGroup
+								<TextAreaGroup
 									placeholder="* Authors"
 									value={this.state.authors}
 									name='authors'
