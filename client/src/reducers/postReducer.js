@@ -18,6 +18,12 @@ export default function(state=initialState, action) {
 				posts: action.payload,
 				loading: false
 			}
+		case actionTypes.GET_POST:
+			return {
+				...state,
+				post: action.payload,
+				loading: false
+			}
 		case actionTypes.ADD_POST:
 			return {
 				...state,

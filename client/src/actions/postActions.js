@@ -2,6 +2,7 @@ import * as actionTypes from './types';
 import axios from 'axios';
 
 export const addPost = postData => dispatch => {
+	dispatch(clearErrors());
 	axios
 		.post('/api/posts', postData)
 		.then(res => dispatch({
@@ -24,6 +25,20 @@ export const getPosts = () => dispatch => {
 		}))
 		.catch(err => dispatch({
 			type: actionTypes.GET_POSTS,
+			payload: null
+		}))
+}
+
+export const getPost = (id) => dispatch => {
+	dispatch(setPostLoading());
+	axios
+		.get(`/api/posts/${id}`)
+		.then(res => dispatch({
+			type: actionTypes.GET_POST,
+			payload: res.data
+		}))
+		.catch(err => dispatch({
+			type: actionTypes.GET_POST,
 			payload: null
 		}))
 }
@@ -60,4 +75,35 @@ export const removeLike = id => dispatch => {
 
 export const setPostLoading = () => ({
 	type: actionTypes.POST_LOADING
+})
+
+export const addComment = (postId, commentData) => dispatch => {
+	dispatch(clearErrors());
+	axios
+		.post(`/api/posts/comment/${postId}`, commentData)
+		.then(res => dispatch({
+			type: actionTypes.GET_POST,
+			payload: res.data
+		}))
+		.catch(err => dispatch({
+			type: actionTypes.GET_ERRORS,
+			payload: err.response.data
+		}))
+}
+
+export const deleteComment = (postId, commentId) => dispatch => {
+	axios
+		.delete(`/api/posts/comment/${postId}/${commentId}`)
+		.then(res => dispatch({
+			type: actionTypes.GET_POST,
+			payload: res.data
+		}))
+		.catch(err => dispatch({
+			type: actionTypes.GET_ERRORS,
+			payload: err.response.data
+		}))
+}
+
+export const clearErrors = () => ({
+	type: actionTypes.CLEAR_ERRORS
 })
