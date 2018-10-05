@@ -15,7 +15,7 @@ class Publication extends Component {
 			<div className="row">
 				<div className="col-md-10">
 					<p>
-						{`${pub.authors}. ${pub.year} "${pub.title}", ${pub.journalinfo}`}
+						{`${pub.authors}. ${pub.year} "`}<strong>{pub.title}</strong>{`" , ${pub.journalinfo}`}
 					</p>
 				</div>
 				<div className="col-md-2">
