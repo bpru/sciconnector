@@ -174,6 +174,10 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
       }
       // add to experience array in the front
       profile.experience.unshift(newExp);
+      // profile.experience.push(newExp);
+      // console.log(profile.experience);
+      // profile.experience.sort(exp => exp.from);
+	    // console.log(profile.experience);
       profile.save().then(profile => res.json(profile))
       .catch(err => res.json(err));
     })
