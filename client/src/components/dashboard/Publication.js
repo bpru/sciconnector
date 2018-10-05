@@ -15,8 +15,15 @@ class Publication extends Component {
 			<div className="row">
 				<div className="col-md-10">
 					<p>
-						{`${pub.authors}. ${pub.year} "`}<strong>{pub.title}</strong>{`" , ${pub.journalinfo}`}
+						{`${pub.authors}. ${pub.year} "`}<strong>{pub.title}</strong>{`" , ${pub.journalinfo}.`}
+						{pub.link ?
+							<span>
+								<br/>
+								{/*<strong>View in:</strong>*/}
+								<a href={pub.link} target="_blank">View Here</a>
+							</span> : null}
 					</p>
+
 				</div>
 				<div className="col-md-2">
 					<button className="btn btn-danger" onClick={() => this.onDeleteClick(pub._id)}>Delete</button>

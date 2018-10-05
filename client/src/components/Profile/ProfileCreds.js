@@ -49,6 +49,12 @@ class ProfileCreds extends Component {
 			<li key={pub._id} className={"list-group-item"}>
 				<p>
 					{`${pub.authors}. ${pub.year} "`}<strong>{pub.title}</strong>{`" , ${pub.journalinfo}`}
+					{pub.link ?
+						<span>
+								<br/>
+							{/*<strong>View in:</strong>*/}
+							<a href={pub.link} target="_blank">View Here</a>
+						</span> : null}
 				</p>
 			</li>
 		))
